@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/github-repository-tracker/static/css/main.1562696d.css",
+    "main.js": "/github-repository-tracker/static/js/main.d6e0b0d5.js",
+    "index.html": "/github-repository-tracker/index.html",
+    "main.1562696d.css.map": "/github-repository-tracker/static/css/main.1562696d.css.map",
+    "main.d6e0b0d5.js.map": "/github-repository-tracker/static/js/main.d6e0b0d5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1562696d.css",
+    "static/js/main.d6e0b0d5.js"
+  ]
+}
