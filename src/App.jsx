@@ -1,27 +1,50 @@
+import Axios from 'axios';
+import { useEffect, useState } from 'react';
+
 function App() {
+  function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+  }
+
+  const [info, getInfo] = useState([]);
+  useEffect(() => {
+    Axios.get(`https://api.github.com/users/Tell396/repos`)
+      .then((response) => {
+        getInfo(response.data[randomNumber(0, 16)]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
   return (
-    <div class="container">
-      <div class="block">
-        <h2>fastify/fastify</h2>
-        <p class="description">Fast and low overhead web framework, for Node.js</p>
+    <div className="container">
+      <div className="block">
+        <h2><b>{info.full_name}</b></h2>
+        <p className="description">{info.description}</p>
 
         <div>
-          <div class="language">
-            <circle class="dot"></circle>
-            <p>JavaScript</p>
+          <div className="language">
+            <span className="dot"></span>
+            <p>{info.language}</p>
           </div>
 
-          <div class="starred">
-            <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd"
+          <div className="starred">
+            <svg
+              width="16"
+              height="17"
+              viewBox="0 0 16 17"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M8.00102 1.81944e-07C8.15222 -0.000104778 8.30043 0.045204 8.42887 0.130798C8.55731 0.216392 8.66086 0.338854 8.72779 0.484322L10.7601 4.90463L15.3065 5.61373C15.456 5.63703 15.5965 5.70475 15.712 5.80922C15.8276 5.91369 15.9135 6.05076 15.9603 6.20493C16.007 6.35909 16.0126 6.52421 15.9765 6.68162C15.9403 6.83903 15.8639 6.98245 15.7557 7.09567L12.4664 10.5369L13.2428 15.394C13.2684 15.5538 13.2518 15.7182 13.1949 15.8684C13.138 16.0186 13.0431 16.1488 12.9209 16.2441C12.7986 16.3395 12.654 16.3962 12.5032 16.408C12.3525 16.4197 12.2017 16.386 12.0679 16.3105L8.00102 14.0164L3.93415 16.3105C3.80045 16.3859 3.64978 16.4196 3.49916 16.4079C3.34854 16.3962 3.20397 16.3395 3.08177 16.2443C2.95958 16.1491 2.86462 16.0192 2.80762 15.8691C2.75063 15.7191 2.73387 15.5549 2.75923 15.3952L3.53675 10.5357L0.245243 7.09567C0.136786 6.98249 0.0600411 6.83899 0.0237055 6.68141C-0.0126301 6.52383 -0.0071037 6.35849 0.0396584 6.20411C0.0864206 6.04973 0.172549 5.91249 0.288283 5.80794C0.404018 5.70339 0.544731 5.63571 0.694478 5.61258L5.24082 4.90463L7.27426 0.484322C7.34119 0.338854 7.44473 0.216392 7.57317 0.130798C7.70162 0.045204 7.84982 -0.000104778 8.00102 1.81944e-07V1.81944e-07ZM8.00102 2.83294L6.50537 6.08299C6.44729 6.20917 6.36152 6.31833 6.25543 6.40108C6.14933 6.48383 6.0261 6.5377 5.89631 6.55805L2.55189 7.07945L4.97085 9.60997C5.06496 9.7083 5.13537 9.82971 5.17601 9.96375C5.21665 10.0978 5.22629 10.2404 5.2041 10.3793L4.63392 13.9526L7.62414 12.2656C7.74037 12.2001 7.86971 12.1658 8.00102 12.1658C8.13233 12.1658 8.26168 12.2001 8.3779 12.2656L11.3692 13.9526L10.7969 10.3793C10.7747 10.2404 10.7843 10.0978 10.825 9.96375C10.8656 9.82971 10.936 9.7083 11.0301 9.60997L13.4491 7.0806L10.1057 6.5592C9.97595 6.53885 9.85271 6.48499 9.74662 6.40224C9.64053 6.31949 9.55475 6.21033 9.49667 6.08415L8.00102 2.83178V2.83294Z"
-                fill="black" fill-opacity="0.4" />
+                fill="black"
+                fillOpacity="0.4"
+              />
             </svg>
-            <p>24.3k</p>
-          </div>
-
-          <div class="update">
-            <p>Updated Mar 7</p>
+            <p>{info.stargazers_count}</p>
           </div>
         </div>
       </div>
